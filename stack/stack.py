@@ -25,15 +25,25 @@ class Stack:
         return self.size
 
     def push(self, value):
+        # increase the size
         self.size += 1
+        # add value to top of stack
         self.storage.add_to_tail(value)
 
     def pop(self):
+        # check the size to determine with method to use
         if self.size > 1:
+            # reduce the size of the stack
             self.size -= 1
+
+            # remove the item on the top of the stack
             return self.storage.remove_tail()
+
         elif self.size == 1:
+            # reduce the size of the stack
             self.size -= 1
+
+            # remove the item on the top of the stack
             return self.storage.remove_head()
 
 
