@@ -213,16 +213,37 @@ class DoublyLinkedList:
 
         # check to see if the list only contains 1 node
         if self.length == 1:
-            # decrease the size of the list
-            self. length -= 1
             # set the head to point to None
             self.head = None
             # set the tail to point to None
             self.tail = None
-            # return the current node value
-            return current_node.value
-        # elif
 
+        # check to see if the current node is between 2 other nodes
+        elif current_node.prev is not None and current_node.next is not None:
+            # set the prev node to point to the next node
+            current_node.prev = current_node.next
+            # set the next node to point to the prev node
+            current_node.next = current_node.prev
+
+        # current node must be either the head or tail
+        else:
+            # check to see if the node is the head
+            if current_node.prev is None:
+                # set the head to point to the current node's next
+                self.head = current_node.next
+                # set new head prev to point to None
+                self.head.prev = None
+            # current node must be the tail
+            else:
+                # set the tail to point to the curret node's prev
+                self.tail = current_node.prev
+                # set new tail next to point to None
+                self.tail.next = None
+
+        # decrease the length of the list
+        self.length -= 1
+        # return the deleted node's value
+        return current_node.value
     """
     Finds and returns the maximum value of all the nodes
     in the List.
