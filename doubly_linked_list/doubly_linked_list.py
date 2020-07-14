@@ -182,7 +182,25 @@ class DoublyLinkedList:
     """
 
     def move_to_end(self, node):
-        pass
+        # get a reference to the current node
+        current_node = node
+
+        # check to see if the node is already the tail
+        if current_node.next is not None:
+            # set the next node's prev to the current node's prev
+            current_node.next.prev = current_node.prev
+
+            # check to see if current node is the head
+            if current_node.prev is not None:
+                # set the prev node's next to the current node's next
+                current_node.prev.next = current_node.next
+
+            # set the current node's next to None
+            current_node.next = None
+            # set the current node's prev to the tail
+            current_node.prev = self.tail
+            # change the tail to point to the current node
+            self.tail = current_node
 
     """
     Deletes the input node from the List, preserving the
@@ -190,7 +208,20 @@ class DoublyLinkedList:
     """
 
     def delete(self, node):
-        pass
+        # get a reference to the current node
+        current_node = node
+
+        # check to see if the list only contains 1 node
+        if self.length == 1:
+            # decrease the size of the list
+            self. length -= 1
+            # set the head to point to None
+            self.head = None
+            # set the tail to point to None
+            self.tail = None
+            # return the current node value
+            return current_node.value
+        # elif
 
     """
     Finds and returns the maximum value of all the nodes
@@ -198,4 +229,22 @@ class DoublyLinkedList:
     """
 
     def get_max(self):
-        pass
+        # start at the head node
+        current = self.head
+        # init the max value to the head node's value
+        max_value = current.value
+
+        # loop through all nodes in the list and compare
+        # the current value to the max value
+        while current:
+            # if the current value is greater replace
+            # the max value with the current value
+            if current.value > max_value:
+                max_value = current.value
+                current = current.next
+            # if the current value is not greater than
+            # the max value skip to next node
+            else:
+                current = current.next
+
+        return max_value
