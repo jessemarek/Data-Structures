@@ -158,16 +158,23 @@ class DoublyLinkedList:
     def move_to_front(self, node):
         # get a reference to the current node
         current_node = node
-        # set the previous node's next to the current node's next
-        current_node.prev.next = current_node.next
-        # set the next node's prev to the current node's prev
-        current_node.next.prev = current_node.prev
-        # set the current node's prev to None
-        current_node.prev = None
-        # set the current node's next to the head
-        current_node.next = self.head
-        # change the head to point to the current node
-        self.head = current_node
+
+        # check to see if the node is already the head
+        if current_node.prev is not None:
+            # set the previous node's next to the current node's next
+            current_node.prev.next = current_node.next
+
+            # check to see if current node is the tail
+            if current_node.next is not None:
+                # set the next node's prev to the current node's prev
+                current_node.next.prev = current_node.prev
+
+            # set the current node's prev to None
+            current_node.prev = None
+            # set the current node's next to the head
+            current_node.next = self.head
+            # change the head to point to the current node
+            self.head = current_node
 
     """
     Removes the input node from its current spot in the
