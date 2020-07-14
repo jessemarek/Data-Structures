@@ -46,7 +46,7 @@ class DoublyLinkedList:
         self.head = new_node
 
         # increase the size of the doubly linked list
-        self.size += 1
+        self.length += 1
 
     """
     Removes the List's current head node, making the
@@ -55,20 +55,43 @@ class DoublyLinkedList:
     """
 
     def remove_from_head(self):
-        # get a reference to the head
-        head = self.head
+        # check to see if the head is also the tail
 
-        # set the head's next node.prev to None
-        self.head.next.prev = None
+        if self.head.next is not None:
+            # get a reference to the head
+            head = self.head
 
-        # move the head to the next node
-        self.head = head.next
+            # set the head's next node.prev to None
+            self.head.next.prev = None
 
-        # decrease the size of the doubly linked list
-        self.length -= 1
+            # move the head to the next node
+            self.head = head.next
 
-        # return the value in the old head
-        return head.value
+            # decrease the size of the doubly linked list
+            self.length -= 1
+
+            # return the value in the old head
+            return head.value
+
+        # check to see if the list only contains 1 Node
+        elif self.length == 1:
+            # get reference to head
+            head = self.head
+
+            # set the list head to point to None
+            self.head = None
+
+            # set the list tail to point to None
+            self.tail = None
+
+            # decrease the size of the doubly linked list
+            self.length -= 1
+
+            # return the removed head's value
+            return head.value
+
+        else:
+            return None
 
     """
     Wraps the given value in a ListNode and inserts it
@@ -99,20 +122,26 @@ class DoublyLinkedList:
     """
 
     def remove_from_tail(self):
-        # get a reference to the tail
-        tail = self.tail
+        # check to see if list length is greater than 0
+        if self.length > 0:
 
-        # set the tail's prev node.next to point to None
-        self.tail.prev.next = None
+            # get a reference to the tail
+            tail = self.tail
 
-        # move the tail reference to point at the new tail node
-        self.tail = tail.prev
+            # set the tail's prev node.next to point to None
+            self.tail.prev.next = None
 
-        # decrease the size of the doubly linked list
-        self.length -= 1
+            # move the tail reference to point at the new tail node
+            self.tail = tail.prev
 
-        # return the value from the old tail
-        return tail
+            # decrease the size of the doubly linked list
+            self.length -= 1
+
+            # return the value from the old tail
+            return tail.value
+
+        else:
+            return None
 
     """
     Removes the input node from its current spot in the
@@ -120,7 +149,23 @@ class DoublyLinkedList:
     """
 
     def move_to_front(self, node):
-        pass
+        # get a reference to the current node
+        current_node = node
+
+        # set the previous node's next to the current node's next
+        current_node.prev.next = current_node.next
+
+        # set the next node's prev to the current node's prev
+        current_node.next.prev = current_node.prev
+
+        # set the current node's prev to None
+        current_node.prev = None
+
+        # set the current node's next to the head
+        current_node.next = self.head
+
+        # change the head to point to the current node
+        self.head = current_node
 
     """
     Removes the input node from its current spot in the
