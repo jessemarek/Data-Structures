@@ -76,23 +76,25 @@ class BSTNode:
         return current.value
 
     # Call the function `fn` on the value of each node
-
     def for_each(self, fn):
         # execute callback fn on self
         fn(self.value)
 
-        # if left child exisits, pass the callback to the child
+        # if left child exisits...
         if self.left is not None:
+            # pass the callback to the child
             self.left.for_each(fn)
 
-        # if right child exisits, pass the callback to the child
+        # if right child exisits...
         if self.right is not None:
+            # pass the callback to the child
             self.right.for_each(fn)
 
     # Part 2 -----------------------
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
+
     def in_order_print(self, node):
         pass
 
