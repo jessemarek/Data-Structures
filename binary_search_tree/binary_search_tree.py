@@ -48,8 +48,8 @@ class BSTNode:
         # check if target value is equal to value
         if self.value == target:
             return True
-        # if target is not equal to value check if we have a left or right child
-        # and compare target to value to see which path to take
+        # if target is not equal to value check if we have a left or right
+        # child and compare target to value to see which path to take
         # if target is < value take the left path
         elif self.left and target < self.value:
             return self.left.contains(target)
@@ -62,9 +62,21 @@ class BSTNode:
 
     # Return the maximum value found in the tree
     def get_max(self):
-        pass
+        # create a variable to store the current node
+        current = self
+
+        # if the current node has a right child
+        # set current to the right child
+        while current.right is not None:
+            current = current.right
+
+        # once we reach the right most leaf it will have
+        # the greatest value that exists in the tree.
+        # return that node's value
+        return current.value
 
     # Call the function `fn` on the value of each node
+
     def for_each(self, fn):
         pass
 
