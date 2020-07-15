@@ -78,7 +78,16 @@ class BSTNode:
     # Call the function `fn` on the value of each node
 
     def for_each(self, fn):
-        pass
+        # execute callback fn on self
+        fn(self.value)
+
+        # if left child exisits, pass the callback to the child
+        if self.left is not None:
+            self.left.for_each(fn)
+
+        # if right child exisits, pass the callback to the child
+        if self.right is not None:
+            self.right.for_each(fn)
 
     # Part 2 -----------------------
 
