@@ -10,6 +10,9 @@ class ListNode:
         self.value = value
         self.next = next
 
+    def __str__(self):
+        return f"Value: {self.value}"
+
 
 """
 Our doubly-linked list class. It holds references to
@@ -160,13 +163,17 @@ class DoublyLinkedList:
         current_node = node
 
         # check to see if the node is already the head
-        if current_node.prev is not None:
+        if current_node is not self.head:
             # set the previous node's next to the current node's next
             current_node.prev.next = current_node.next
 
             # check to see if current node is the tail
-            if current_node.next is not None:
-                # set the next node's prev to the current node's prev
+            if current_node is self.tail:
+                # if current node is the tail set tail to point to prev node
+                self.tail = current_node.prev
+
+            # set the next node's prev to the current node's prev
+            else:
                 current_node.next.prev = current_node.prev
 
             # set the current node's prev to None
@@ -182,17 +189,33 @@ class DoublyLinkedList:
     """
 
     def move_to_end(self, node):
-        # get a reference to the current node
+        # check if node is not at the head or tail
+        if node is not self.head and node is not self.tail:
+            # delete the node
+            self.delete(node)
+            # create a new node at the end with the old node's value
+            self.add_to_tail(node.value)
+
+        # if node is the head use different methods
+        elif node is self.head:
+            self.remove_from_head()
+            self.add_to_tail(node.value)
+
+        """ # get a reference to the current node
         current_node = node
 
         # check to see if the node is already the tail
-        if current_node.next is not None:
+        if current_node is not self.tail:
             # set the next node's prev to the current node's prev
             current_node.next.prev = current_node.prev
 
             # check to see if current node is the head
-            if current_node.prev is not None:
-                # set the prev node's next to the current node's next
+            if current_node is self.head:
+                # if current node is the head set head to point to next node
+                self.head = current_node.next
+
+            # set the prev node's next to the current node's next
+            else:
                 current_node.prev.next = current_node.next
 
             # set the current node's next to None
@@ -200,7 +223,7 @@ class DoublyLinkedList:
             # set the current node's prev to the tail
             current_node.prev = self.tail
             # change the tail to point to the current node
-            self.tail = current_node
+            self.tail = current_node """
 
     """
     Deletes the input node from the List, preserving the
