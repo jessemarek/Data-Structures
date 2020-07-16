@@ -66,9 +66,8 @@ class BSTNode:
         if self.right:
             # if there is a right child execute that node's get_max
             return self.right.get_max()
-        # this node is the greatest value in the BST
-        else:
-            return self.value
+        # if no right child, this node is the greatest value in the BST
+        return self.value
         """ # create a variable to store the current node
         current = self
 
@@ -101,9 +100,23 @@ class BSTNode:
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
-
     def in_order_print(self, node):
-        pass
+        # left -> node -> right
+
+        # dive down to the left most leaf
+        # this will be the smallest value
+        if node.left:
+            node.left.in_order_print(node.left)
+
+        # if no other left children exist this means
+        # the current node is now the smallest value
+        # that hasn't yet been handled. print the value
+        print(node.value)
+
+        # if the node has a right child then we have values
+        # that are greater than the current node. print that value
+        if node.right:
+            node.right.in_order_print(node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
@@ -115,10 +128,11 @@ class BSTNode:
     def dft_print(self, node):
         pass
 
-    # Stretch Goals -------------------------
-    # Note: Research may be required
+        # Stretch Goals -------------------------
+        # Note: Research may be required
 
-    # Print Pre-order recursive DFT
+        # Print Pre-order recursive DFT
+
     def pre_order_dft(self, node):
         pass
 
