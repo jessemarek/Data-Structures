@@ -172,22 +172,22 @@ class BSTNode:
             # print current node's value
             print(current.value)
 
-            # if current node has a right child,
-            # execute that child's dft_print()
-            if(current.right):
-                current.right.dft_print(current.right)
-
             # if current node has a left child,
             # execute that child's dft_print()
             if(current.left):
                 current.left.dft_print(current.left)
+
+            # if current node has a right child,
+            # execute that child's dft_print()
+            if(current.right):
+                current.right.dft_print(current.right)
 
         # Stretch Goals -------------------------
         # Note: Research may be required
 
     # Print Pre-order recursive DFT
     def pre_order_dft(self, node):
-        pass
+        self.dft_print(node)
 
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
