@@ -98,6 +98,16 @@ class BSTNode:
 
     # Part 2 -----------------------
 
+    #     1
+    #      \
+    #       8
+    #      /
+    #     5
+    #    / \
+    #   3   7
+    #  / \ /
+    # 2  4 6
+
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
@@ -121,18 +131,61 @@ class BSTNode:
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        # node -> left -> right
+        from collections import deque
+
+        # create a queue and pass it the first node
+        queue = deque()
+        queue.append(node)
+
+        # continue to traverse while there are nodes in the queue
+        while len(queue) > 0:
+            current = queue.popleft()
+
+            # if the next level has a left node...
+            if current.left:
+                # add to queue
+                queue.append(current.left)
+
+            # if the next level has a right node...
+            if current.right:
+                # add to queue
+                queue.append(current.right)
+
+            # print the current node's value
+            print(current.value)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        from collections import deque
+
+        # create a queue and pass it the first node
+        queue = deque()
+        queue.append(node)
+
+        # continue to traverse while there are nodes in the queue
+        while len(queue) > 0:
+            # get first node in queue
+            current = queue.popleft()
+
+            # print current node's value
+            print(current.value)
+
+            # if current node has a right child,
+            # execute that child's dft_print()
+            if(current.right):
+                current.right.dft_print(current.right)
+
+            # if current node has a left child,
+            # execute that child's dft_print()
+            if(current.left):
+                current.left.dft_print(current.left)
 
         # Stretch Goals -------------------------
         # Note: Research may be required
 
-        # Print Pre-order recursive DFT
-
+    # Print Pre-order recursive DFT
     def pre_order_dft(self, node):
         pass
 
